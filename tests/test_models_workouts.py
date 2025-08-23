@@ -1,6 +1,7 @@
 import pytest
 from datetime import date
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy import text
 from server.models import db, Workout
 
 
@@ -41,4 +42,17 @@ def test_workout_duration_check_constraint():
     db.session.add(bad)
 
     with pytest.raises(IntegrityError):
+        db.session.commit()
+
+def test_workout_duration_check_constraint():
+    """
+    Constraint path:
+    - bypass model validation by issuing raw SQL
+    - CheckConstraint should enforce duration_minutes >= 0 at the DB level
+    """
+    # Insert directly into DB without ORM validation
+    insert_sql = text("INSERT INTO workouts (date, duration_minutes) VALUES (:date, :dur)")
+    
+    with pytest.raises(IntegrityError):
+        db.session.execute(insert_sql, {"date": "2025-01-04", "dur": -1})
         db.session.commit()
