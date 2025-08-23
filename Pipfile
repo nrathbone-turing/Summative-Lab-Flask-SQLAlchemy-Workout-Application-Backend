@@ -17,4 +17,6 @@ pytest-flask = "*"
 
 [scripts]
 start = "flask run"
+migrate = "flask db migrate"
+upgrade = "flask db upgrade"
 seed = "python -m server.seed"
