@@ -33,3 +33,8 @@ def app_context(app):
     """context manager for tests that need to be passed an app context"""
     with app.app_context():
         yield
+
+@pytest.fixture
+def client(app):
+    """Flask test client for hitting routes"""
+    return app.test_client()

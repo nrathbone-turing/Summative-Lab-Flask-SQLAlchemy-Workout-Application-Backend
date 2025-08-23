@@ -1,3 +1,4 @@
+# tests/test_routes_exercises.py
 """
 PSEUDOCODE ROUTE TESTS (Exercises):
 - GET /exercises returns 200 and list
@@ -6,7 +7,43 @@ PSEUDOCODE ROUTE TESTS (Exercises):
 - DELETE /exercises/<id> --> 204/200; not found --> 404
 - POST join endpoint adds WorkoutExercise
 """
-# def test_list_exercises_placeholder(client):
-# resp = client.get('/exercises')
-# # PSEUDOCODE: assert status code
-# assert resp.status_code in (200, 501)
+
+"""
+smoke tests for /exercises endpoints to ensure routes are registered and return placeholder 501 status codes for now
+"""
+
+def test_list_exercises_placeholder(client):
+    resp = client.get("/exercises/")
+    assert resp.status_code == 200
+    assert resp.is_json
+    assert "message" in resp.get_json()
+
+def test_get_exercise_placeholder(client):
+    resp = client.get("/exercises/1")
+    assert resp.status_code == 200
+    assert resp.is_json
+    assert "message" in resp.get_json()
+
+def test_create_exercise_placeholder(client):
+    resp = client.post("/exercises/", json={"name": "Push-ups", "category": "Strength"})
+    assert resp.status_code == 201
+    assert resp.is_json
+    assert "message" in resp.get_json()
+
+def test_delete_exercise_placeholder(client):
+    resp = client.delete("/exercises/1")
+    assert resp.status_code == 204
+    # 204 status code has no message body, so skiping the json check here
+
+def test_get_exercise_not_found(client):
+    resp = client.get("/exercises/9999")
+    assert resp.status_code == 404
+
+def test_create_exercise_invalid_payload(client):
+    # missing name/category
+    resp = client.post("/exercises/", json={})  
+    assert resp.status_code == 400
+
+def test_delete_exercise_not_found(client):
+    resp = client.delete("/exercises/9999")
+    assert resp.status_code == 404
