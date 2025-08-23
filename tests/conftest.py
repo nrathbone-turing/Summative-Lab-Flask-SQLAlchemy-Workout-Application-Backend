@@ -35,6 +35,6 @@ def app_context(app):
         yield
 
 @pytest.fixture
-def client():
+def client(app):
     """Flask test client for hitting routes"""
     return app.test_client()

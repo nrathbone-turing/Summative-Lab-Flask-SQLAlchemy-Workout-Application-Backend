@@ -9,7 +9,7 @@ PSEUDOCODE WORKOUT ROUTES:
 from flask import Blueprint, jsonify
 
 # define a blueprint for workout-related endpoints
-workouts_bp = Blueprint("workouts", __name__, url_prefix="/workouts")
+workouts_bp = Blueprint("workouts", __name__, url_prefix="/workouts/")
 
 @workouts_bp.get("/")
 def list_workouts():

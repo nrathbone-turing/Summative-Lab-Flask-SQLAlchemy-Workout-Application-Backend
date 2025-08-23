@@ -10,27 +10,25 @@ PSEUDOCODE ROUTE TESTS (Workouts):
 """
 smoke tests for /workouts endpoints to ensure routes are registered and return placeholder 501 status codes for now
 """
-
 def test_list_workouts_placeholder(client):
     resp = client.get("/workouts/")
-    assert resp.status_code == 501
+    assert resp.status_code == 200
     assert resp.is_json
     assert "message" in resp.get_json()
 
 def test_get_workout_placeholder(client):
     resp = client.get("/workouts/1")
-    assert resp.status_code == 501
+    assert resp.status_code == 200
     assert resp.is_json
     assert "message" in resp.get_json()
 
 def test_create_workout_placeholder(client):
     resp = client.post("/workouts/", json={"date": "2025-08-24", "duration_minutes": 30})
-    assert resp.status_code == 501
+    assert resp.status_code == 201
     assert resp.is_json
     assert "message" in resp.get_json()
 
 def test_delete_workout_placeholder(client):
     resp = client.delete("/workouts/1")
-    assert resp.status_code == 501
-    assert resp.is_json
-    assert "message" in resp.get_json()
+    assert resp.status_code == 204
+    # 204 status code has no message body, so skiping the json check here

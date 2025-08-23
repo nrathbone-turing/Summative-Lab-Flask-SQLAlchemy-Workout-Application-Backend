@@ -13,7 +13,7 @@ from sqlalchemy.orm import validates, relationship
 from sqlalchemy.ext.associationproxy import association_proxy
 from flask import Blueprint, request, jsonify
 
-exercises_bp = Blueprint("exercises", __name__, url_prefix="/exercises")
+exercises_bp = Blueprint("exercises", __name__, url_prefix="/exercises/")
 
 @exercises_bp.get("/")
 def list_exercises():

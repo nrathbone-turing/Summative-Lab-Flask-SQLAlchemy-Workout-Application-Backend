@@ -14,24 +14,23 @@ smoke tests for /exercises endpoints to ensure routes are registered and return 
 
 def test_list_exercises_placeholder(client):
     resp = client.get("/exercises/")
-    assert resp.status_code == 501
+    assert resp.status_code == 200
     assert resp.is_json
     assert "message" in resp.get_json()
 
 def test_get_exercise_placeholder(client):
     resp = client.get("/exercises/1")
-    assert resp.status_code == 501
+    assert resp.status_code == 200
     assert resp.is_json
     assert "message" in resp.get_json()
 
 def test_create_exercise_placeholder(client):
     resp = client.post("/exercises/", json={"name": "Push-ups", "category": "Strength"})
-    assert resp.status_code == 501
+    assert resp.status_code == 201
     assert resp.is_json
     assert "message" in resp.get_json()
 
 def test_delete_exercise_placeholder(client):
     resp = client.delete("/exercises/1")
-    assert resp.status_code == 501
-    assert resp.is_json
-    assert "message" in resp.get_json()
+    assert resp.status_code == 204
+    # 204 status code has no message body, so skiping the json check here
