@@ -56,11 +56,28 @@ class Exercise(db.Model):
     def __repr__(self):
         return f"<Exercise id={self.id} name={self.name!r} category={self.category!r}>"
     
-#
-# class Workout(db.Model):
-# # PSEUDOCODE: define columns, constraints, relationships to WorkoutExercise
-# pass
-#
+
+class Workout(db.Model):
+    __tablename__ = "workouts"
+
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.Date, nullable=False)
+    duration_minutes = db.Column(db.Integer, nullable=False, default=0)
+    notes = db.Column(db.Text)
+
+    __table_args__ = (
+        CheckConstraint("duration_minutes >= 0", name="ck_workout_duration_nonneg"),
+    )
+
+    @validates("duration_minutes")
+    def validate_duration(self, key, value):
+        if value is None or int(value) < 0:
+            raise ValueError("duration_minutes must be >= 0")
+        return int(value)
+
+    def __repr__(self):
+        return f"<Workout id={self.id} date={self.date} duration={self.duration_minutes}m>"
+
 # class WorkoutExercise(db.Model):
 # # PSEUDOCODE: define columns, FKs to Workout/Exercise, constraints
 # # Relationship backrefs to Workout and Exercise
