@@ -1,3 +1,4 @@
+# server/app.py
 """
 PSEUDOCODE APP SETUP:
 - Initialize Flask app
@@ -5,10 +6,9 @@ PSEUDOCODE APP SETUP:
 - Register blueprints for /workouts and /exercises
 - Define placeholder routes or healthcheck
 """
-from flask import Flask, make_response, jsonify
+from flask import Flask, jsonify
 from flask_migrate import Migrate
 from server.models import db
-from server import models
 from server.routes.workouts import workouts_bp
 from server.routes.exercises import exercises_bp
 from server.routes.workout_exercises import we_bp

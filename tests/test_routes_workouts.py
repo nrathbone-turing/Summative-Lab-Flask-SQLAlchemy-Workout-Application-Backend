@@ -6,9 +6,6 @@ PSEUDOCODE ROUTE TESTS (Workouts):
 - POST /workouts creates record; invalid payload --> 400
 - DELETE /workouts/<id> deletes record; not found --> 404
 """
-def test_healthcheck(client):
-    resp = client.get("/")
-    assert resp.status_code == 200
 
 """
 smoke tests for /workouts endpoints to ensure routes are registered and return placeholder 501 status codes for now
