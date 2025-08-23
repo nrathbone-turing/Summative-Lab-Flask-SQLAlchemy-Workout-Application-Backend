@@ -1,11 +1,6 @@
 import pytest
 from server.app import app
 
-@pytest.fixture
-def client():
-    """Flask test client for hitting routes."""
-    return app.test_client()
-
 def test_add_workout_exercise_placeholder(client):
     """
     POST /workouts/<workout_id>/exercises/<exercise_id>/workout_exercises
