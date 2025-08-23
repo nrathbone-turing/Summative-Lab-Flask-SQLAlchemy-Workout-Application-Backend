@@ -1,26 +1,10 @@
 
 # server/models.py
 """
-MODELS:
-- Exercise(id, name, category, equipment_needed)
-- Workout(id, date, duration_minutes, notes)
-- WorkoutExercise(id, workout_id, exercise_id, reps, sets, duration_seconds)
-
-
-RELATIONSHIPS:
-- WorkoutExercise belongs to Workout
-- WorkoutExercise belongs to Exercise
-- Workout has many WorkoutExercises
-- Exercise has many WorkoutExercises
-- Workout has many Exercises through WorkoutExercises
-- Exercise has many Workouts through WorkoutExercises
-
-
 VALIDATIONS (examples to consider later):
 - name non-empty, category in allowed set
 - duration_minutes >= 0
 - reps/sets/duration_seconds >= 0
-
 
 TABLE CONSTRAINTS (examples to consider later):
 - Unique constraint on Exercise(name, category) to avoid dupes?
