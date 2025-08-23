@@ -43,3 +43,9 @@ TABLE CONSTRAINTS (examples to consider later):
 # # PSEUDOCODE: define columns, FKs to Workout/Exercise, constraints
 # # Relationship backrefs to Workout and Exercise
 # pass
+
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import validates
+db = SQLAlchemy()
+
+# Define Models here
