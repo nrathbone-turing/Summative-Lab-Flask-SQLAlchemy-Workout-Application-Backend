@@ -34,3 +34,16 @@ def test_delete_exercise_placeholder(client):
     resp = client.delete("/exercises/1")
     assert resp.status_code == 204
     # 204 status code has no message body, so skiping the json check here
+
+def test_get_exercise_not_found(client):
+    resp = client.get("/exercises/9999")
+    assert resp.status_code == 404
+
+def test_create_exercise_invalid_payload(client):
+    # missing name/category
+    resp = client.post("/exercises/", json={})  
+    assert resp.status_code == 400
+
+def test_delete_exercise_not_found(client):
+    resp = client.delete("/exercises/9999")
+    assert resp.status_code == 404
