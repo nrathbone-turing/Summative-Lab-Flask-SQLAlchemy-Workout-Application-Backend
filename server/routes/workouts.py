@@ -1,12 +1,4 @@
 # server/routes/workouts.py
-"""
-WORKOUT ROUTES:
-- GET /workouts --> list all workouts
-- GET /workouts/<id> --> show single workout
-- POST /workouts --> create a workout
-- DELETE /workouts/<id> --> delete workout
-"""
-
 from flask import Blueprint, jsonify, request
 from server.models import db, Workout
 from datetime import datetime
