@@ -1,0 +1,21 @@
+[requires]
+python_version = "3.11"
+
+
+[packages]
+flask = "*"
+flask-sqlalchemy = "*"
+flask-migrate = "*"
+marshmallow = "*"
+marshmallow-sqlalchemy = "*"
+python-dotenv = "*"
+
+
+[dev-packages]
+pytest = "*"
+pytest-flask = "*"
+
+
+[scripts]
+start = "flask run"
+seed = "python -m server.seed"
