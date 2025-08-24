@@ -1,6 +1,6 @@
 # Workout Application Backend (Flask + SQLAlchemy)
 
-> Summative assessment project implementing a REST API with database persistence, validations, and schema-based serialization.
+ A summative assessment project implementing a REST API with database persistence, validations, and schema-based serialization.
 
 ## Overview
 - A workout tracking backend with:
