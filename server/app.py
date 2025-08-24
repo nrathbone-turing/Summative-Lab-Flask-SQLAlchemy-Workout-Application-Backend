@@ -1,11 +1,4 @@
 # server/app.py
-"""
-PSEUDOCODE APP SETUP:
-- Initialize Flask app
-- Configure SQLAlchemy + Migrate
-- Register blueprints for /workouts and /exercises
-- Define placeholder routes or healthcheck
-"""
 from flask import Flask, jsonify
 from flask_migrate import Migrate
 from server.models import db

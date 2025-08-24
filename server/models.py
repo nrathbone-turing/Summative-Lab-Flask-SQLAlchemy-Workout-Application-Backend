@@ -1,16 +1,5 @@
 
 # server/models.py
-"""
-VALIDATIONS (examples to consider later):
-- name non-empty, category in allowed set
-- duration_minutes >= 0
-- reps/sets/duration_seconds >= 0
-
-TABLE CONSTRAINTS (examples to consider later):
-- Unique constraint on Exercise(name, category) to avoid dupes?
-- Check constraints for non-negative integers
-- Foreign keys with cascade or ON DELETE behavior (stretch)
-"""
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import CheckConstraint, UniqueConstraint, ForeignKey
 from sqlalchemy.orm import validates, relationship
