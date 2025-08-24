@@ -2,6 +2,7 @@
 from flask import Blueprint, request, jsonify
 from server.models import db, Exercise
 from server.schemas import ExerciseSchema, ExerciseCreateSchema
+from marshmallow import ValidationError
 
 exercises_bp = Blueprint("exercises", __name__, url_prefix="/exercises/")
 
@@ -29,6 +30,8 @@ def create_exercise():
     data = request.get_json() or {}
     try:
         payload = exercise_create_schema.load(data)
+    except ValidationError as err:
+        return jsonify({"errors": err.messages}), 400
     except Exception as err:
         return jsonify({"error": str(err)}), 400
 

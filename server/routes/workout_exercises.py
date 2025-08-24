@@ -2,6 +2,7 @@
 from flask import Blueprint, request, jsonify
 from server.models import db, Workout, Exercise, WorkoutExercise
 from server.schemas import WorkoutExerciseSchema, WorkoutExerciseCreateSchema
+from marshmallow import ValidationError
 
 we_bp = Blueprint("workout_exercises", __name__, url_prefix="")
 
@@ -21,7 +22,10 @@ def add_workout_exercise(workout_id, exercise_id):
 
     data = request.get_json() or {}
     try:
-        payload = we_create_schema.load(data)  # validates ints / allows None
+        # Marshmallow schema validations happen here (ranges, required, schema-level rule)
+        payload = we_create_schema.load(data)
+
+        # then if we get here & the payload is valid, create the join row
         link = WorkoutExercise(
             workout=workout,
             exercise=exercise,
@@ -29,8 +33,12 @@ def add_workout_exercise(workout_id, exercise_id):
         )
         db.session.add(link)
         db.session.commit()
+
+    except ValidationError as err:
+        # schema validation errors (e.g., negative reps, nothing provided, etc.)
+        return jsonify({"errors": err.messages}), 400
     except ValueError as e:
-        # from @validates on the model (negative numbers, etc.)
+        # model-level @validates errors (e.g., it converts a string or number into an int successfully, but it turns out to be less than 0)
         return jsonify({"error": str(e)}), 400
     except Exception as err:
         return jsonify({"error": str(err)}), 400
